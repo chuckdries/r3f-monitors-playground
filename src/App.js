@@ -90,6 +90,7 @@ export default function App() {
       </Canvas>
       <Overlay>
         <button onClick={() => setTargetPos(targetPos === 'start' ? 'center' : 'start')}>click</button>
+        <input type='text' value={name} onChange={e => setName(e.target.value)} />
       </Overlay>
       <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} />
     </>

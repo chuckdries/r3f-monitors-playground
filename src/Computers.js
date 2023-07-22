@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useMemo, useContext, createContext, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useGLTF, Merged, RenderTexture, PerspectiveCamera, Text } from '@react-three/drei'
+import { useGLTF, Merged, RenderTexture, PerspectiveCamera, Text, Html } from '@react-three/drei'
 import { SpinningBox } from './SpinningBox'
 THREE.ColorManagement.legacyMode = false
 
@@ -172,6 +172,9 @@ function Screen({ frame, panel, children, ...props }) {
   const { nodes, materials } =useGLTF(COMPUTER)
   return (
     <group {...props}>
+      <Html transform scale={0.25}>
+        <input value={'hey'} />
+      </Html>
       <mesh castShadow receiveShadow geometry={nodes[frame].geometry} material={materials.Texture} />
       <mesh geometry={nodes[panel].geometry}>
         <meshBasicMaterial toneMapped={false}>
@@ -212,6 +215,7 @@ function ScreenInteractive(props) {
       <pointLight position={[10, 10, 10]} intensity={0.75} />
       <pointLight position={[-10, -10, -10]} />
       <SpinningBox position={[-3.15, 0.75, 0]} scale={0.5} />
+      
     </Screen>
   )
 }
