@@ -5,7 +5,7 @@
   "keywords": [
     "bloom"
   ],
-  "main": "src/index.js",
+  "source": "src/index.html",
   "dependencies": {
     "@pmndrs/branding": "0.0.8",
     "@react-three/drei": "9.77.1",
@@ -18,8 +18,12 @@
     "react-scripts": "5.0.1",
     "three": "0.146.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
   "scripts": {
+    "dev": "parcel",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

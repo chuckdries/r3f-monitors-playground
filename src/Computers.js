@@ -17,7 +17,7 @@ Title: Old Computers
 
 const context = createContext()
 export function Instances({ children, ...props }) {
-  const { nodes } = useGLTF('/computers_1-transformed.glb')
+  const { nodes } = useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url))
   const instances = useMemo(
     () => ({
       Object: nodes.Object_4,

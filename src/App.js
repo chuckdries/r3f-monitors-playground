@@ -15,7 +15,7 @@ export default function App() {
       <group position={[-0, -1, 0]}>
         {/* Auto-instanced sketchfab model */}
         <Instances>
-          <Computers scale={0.5} />
+          {/* <Computers scale={0.5} /> */}
         </Instances>
         {/* Plane reflections + distance blur */}
         <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
