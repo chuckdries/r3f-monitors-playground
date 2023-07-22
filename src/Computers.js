@@ -17,7 +17,8 @@ Title: Old Computers
 
 const context = createContext()
 export function Instances({ children, ...props }) {
-  const { nodes } = useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url))
+  console.log((new URL('assets/computers_1-transformed.glb', import.meta.url)).toString())
+  const { nodes } = useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url).toString())
   const instances = useMemo(
     () => ({
       Object: nodes.Object_4,
@@ -45,7 +46,7 @@ export function Instances({ children, ...props }) {
 }
 
 export function Computers(props) {
-  const { nodes: n, materials: m } = useGLTF('/computers_1-transformed.glb')
+  const { nodes: n, materials: m } = useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url))
   const instances = useContext(context)
   return (
     <group {...props} dispose={null}>
@@ -166,7 +167,7 @@ export function Computers(props) {
 /* This component renders a monitor (taken out of the gltf model)
    It renders a custom scene into a texture and projects it onto monitors screen */
 function Screen({ frame, panel, children, ...props }) {
-  const { nodes, materials } = useGLTF('/computers_1-transformed.glb')
+  const { nodes, materials } =useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url))
   return (
     <group {...props}>
       <mesh castShadow receiveShadow geometry={nodes[frame].geometry} material={materials.Texture} />
@@ -186,13 +187,14 @@ function ScreenText({ invert, x = 0, y = 1.2, ...props }) {
   const textRef = useRef()
   const rand = Math.random() * 10000
   useFrame((state) => (textRef.current.position.x = x + Math.sin(rand + state.clock.elapsedTime / 4) * 8))
+  console.log(new URL("assets/Inter-Medium.woff", import.meta.url))
   return (
     <Screen {...props}>
       <PerspectiveCamera makeDefault manual aspect={1 / 1} position={[0, 0, 15]} />
       <color attach="background" args={[invert ? 'black' : '#35c19f']} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} />
-      <Text font="/Inter-Medium.woff" position={[x, y, 0]} ref={textRef} fontSize={4} letterSpacing={-0.1} color={!invert ? 'black' : '#35c19f'}>
+      <Text font={new URL("assets/Inter-Medium.woff", import.meta.url)} position={[x, y, 0]} ref={textRef} fontSize={4} letterSpacing={-0.1} color={!invert ? 'black' : '#35c19f'}>
         Poimandres.
       </Text>
     </Screen>
@@ -216,7 +218,7 @@ function ScreenInteractive(props) {
 // Renders flashing LED's
 function Leds({ instances }) {
   const ref = useRef()
-  const { nodes } = useGLTF('/computers_1-transformed.glb')
+  const { nodes } =useGLTF(new URL('assets/computers_1-transformed.glb', import.meta.url))
   useMemo(() => {
     nodes.Sphere.material = new THREE.MeshBasicMaterial()
     nodes.Sphere.material.toneMapped = false
